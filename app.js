@@ -14,6 +14,10 @@ app.get('/items',(req,res)=>{
     res.render('items',{title:'ShopCart'});
 });
 
+app.get('/itemsingle',(req,res)=>{
+    res.render('itemsingle',{title:'ShopCart'});
+});
+
 app.listen(process.env.PORT || 3456,()=>{
     console.log('Server is running on PORT:3456...')
 });
