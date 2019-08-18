@@ -17,25 +17,20 @@
         </ul>
     </nav>
 
-    <div class="album py-5 bg-#00aabb">
-        <div class="container">
-            <div class="row">
-                <% for(var i=0;i<item.length;i++){ %>
-                <div class="col-md-4 p-2">
-                    <div class="card mb-5 shadow-sm" style="width: 20rem;">
-                        <img class="bd-placeholder-img mx-auto mt-3" width="32%" height="225" src="<%= item[i].image %>"/>
+    <div class="container mt-5">
+        <div class="row">
+            <% for(var i=0;i<item.length;i++){ %>
+                <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-3 p-2">
+                    <div class="card">
+                        <img class="rounded mx-auto d-block mt-3" src="<%= item[i].image %>" width="32%" height="225" alt="Card image cap">
                         <div class="card-body">
-                            <h2><%= item[i].name %></h2>
+                            <h5 class="card-title"><%= item[i].name %></h5>
                             <p class="card-text"><strong>Price: </strong><%= item[i].price %></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="/itemsingle/<%= i %>" class="btn btn-primary">Buy Now</a>
-                            </div>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
                         </div>
                     </div>
                 </div>
-                <% } %>
-                
-            </div>
+            <% } %>
         </div>
     </div>
 
