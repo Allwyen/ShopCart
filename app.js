@@ -1,10 +1,30 @@
-const Express = require('express');
+const Express = require("express");
+const Mongoose = require('mongoose');
+
+var request = require('request');
+var bodyParser = require('body-parser');
+
+//Now creating a object for class Express called app
 
 var app = new Express();
 
-app.set('view engine','ejs');
+//Adding a middleware.EJS template engine
 
-app.use(Express.static(__dirname+'/public'));
+app.set('view engine','ejs'); 
+
+app.use(Express.static(__dirname+"/public"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
+Mongoose.connect("mongodb+srv://mongodb:mongodb@mycluster-ucvz5.mongodb.net/shopcartdb?retryWrites=true&w=majority");
+
+const MobileModel= Mongoose.model("mobile",{
+    mname:String,
+    mprice:String,
+    mdesc:String,
+    mreview:String,
+});
+
 
 items=[{
     'name':'Apple 6S',
@@ -140,6 +160,54 @@ app.get('/items',(req,res)=>{
 app.get('/itemsingle/:id',(req,res)=>{
     const x = req.params.id;
     res.render('itemsingle',{title:'Shop Cart',item:items[x]});
+});
+
+app.get('/addmobile',(req,res)=>{
+    res.render('addmobile');
+});
+
+app.post('/read',(req,res)=>{
+    //var items=req.body;
+    //res.render('read',{item:items});
+
+    var mobile = new MobileModel(req.body);
+    var result = mobile.save((error,data)=>{
+        if(error)
+        {
+            throw error;
+            res.send(error);
+        }
+        else
+        {
+            res.send("<script>alert('Mobile Successfully Inserted')</script><script>window.location.href='/addmobile'</script>");
+        }
+    });
+
+});
+
+app.get('/mobileall',(req,res)=>{
+
+    var result = MobileModel.find((error,data)=>{
+        if(error)
+        {
+            throw error;
+            res.send(error);
+        }
+        else
+        {
+            res.send(data);
+        }
+    });
+});
+
+const APIurl = "http://localhost:3456/mobileall";
+
+app.get('/viewmobile',(req,res)=>{
+
+    request(APIurl,(error,response,body)=>{
+        var data = JSON.parse(body);
+        res.render('viewmobile',{data:data});
+    });
 });
 
 app.listen(process.env.PORT || 3456,()=>{

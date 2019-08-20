@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><%= title %></title>
+    <title>Shopping</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <ul class="navbar-nav">
             <li class="nav-item active">
@@ -25,27 +25,21 @@
                         </li>
         </ul>
     </nav>
- 
-    <div class="container mt-4">
+
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-2 p-4">
-                <div class="card">
-                    <img class="rounded mx-auto d-block mt-3" src="<%= item.image %>" width="13%" height="230" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= item.name %></h5>
-                        <p class="card-text"><strong>Price</strong><br><%= item.price %></p>
-                        <p class="card-text text-justify"><strong>Summary</strong><br><%= item.desc %></p>
-                        <p class="card-text"><strong>Reviews</strong><br>
-                            <% for(var i=0;i<item.feedback.length;i++){ %>
-                                <li><i><%= item.feedback[i] %></i></li>
-                            <% } %>
-                        </p>
-                    </div>
-                </div>
+            <div class="col col-lg-6">
+                <form action="/read" method="POST">
+                    <table class="table">
+                        <tr><td>Name:</td><td><input type="text" name="mname" class="form-control" id=""></td></tr>
+                        <tr><td>Price:</td><td><input type="text" name="mprice" class="form-control" id=""></td></tr>
+                        <tr><td>Summary:</td><td><textarea name="mdesc" class="form-control" id="" cols="40" rows="3"></textarea></td></tr>
+                        <tr><td>Review:</td><td><textarea name="mreview" class="form-control" id="" cols="40" rows="3"></textarea></td></tr>
+                        <tr><td></td><td><input type="submit" class="btn btn-primary" value="Submit"></td></tr>
+                    </table>
+                </form>
             </div>
         </div>
     </div>
 </body>
 </html>
-
-
