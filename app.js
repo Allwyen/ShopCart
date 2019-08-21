@@ -200,7 +200,7 @@ app.get('/mobileall',(req,res)=>{
     });
 });
 
-const APIurl = "http://localhost:3456/mobileall";
+const APIurl = "http://shoppingapp-allwyen.herokuapp.com/mobileall";
 
 app.get('/viewmobile',(req,res)=>{
 
